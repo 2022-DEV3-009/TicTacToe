@@ -153,3 +153,23 @@ it('should not be allowed to click after a draw', () => {
 
   expect(cells[0].textContent).toBe('x')
 });
+
+it('should restart the game', () => {
+  render(<Grid />)
+
+  const restartButton = screen.getByTestId('restartButton');
+  const cells = screen.queryAllByTestId('cell')
+
+  fireEvent.click(restartButton)
+
+  expect(cells.length).toBe(9)
+  expect(cells[0].textContent).toBe('')
+  expect(cells[1].textContent).toBe('')
+  expect(cells[2].textContent).toBe('')
+  expect(cells[3].textContent).toBe('')
+  expect(cells[4].textContent).toBe('')
+  expect(cells[5].textContent).toBe('')
+  expect(cells[6].textContent).toBe('')
+  expect(cells[7].textContent).toBe('')
+  expect(cells[8].textContent).toBe('')
+});

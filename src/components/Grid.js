@@ -45,6 +45,11 @@ const Grid = () => {
     }
 	};
 
+  const handleRestart = () => {
+    setWinner(null);
+    setCells(Array(9).fill(''));
+  };
+
   const renderMessage = () => {
     if (winner) {
       return (
@@ -86,6 +91,9 @@ const Grid = () => {
             <Cell cellNum={7} handleClick={handleClick} cells={cells} />
             <Cell cellNum={8} handleClick={handleClick} cells={cells} />
           </div>
+        </div>
+        <div>
+          <button onClick={() => handleRestart()} className={styles.playAgain} data-testid="restartButton">Restart</button>
         </div>
       </div>
     </>

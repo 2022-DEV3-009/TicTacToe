@@ -1,3 +1,6 @@
+h1 {
+  text-align: center;
+}
 .game {
   margin: 0 auto;
   width: max-content;
@@ -8,4 +11,8 @@
 .row {
   display: flex;
   justify-content: center;
+}
+.playAgain {
+  margin-top: 15px;
+  width: 100%;
 }
