@@ -1,5 +1,20 @@
+import { render, screen } from '@testing-library/react'
+import Grid from '../../components/Grid';
+
 it('should display grid with initial cells state', () => {
-  throw new Error('Not implemented');
+  render (<Grid />);
+
+  const cells = screen.queryAllByTestId('cell')
+  expect(cells.length).toBe(9)
+  expect(cells[0].textContent).toBe('')
+  expect(cells[1].textContent).toBe('')
+  expect(cells[2].textContent).toBe('')
+  expect(cells[3].textContent).toBe('')
+  expect(cells[4].textContent).toBe('')
+  expect(cells[5].textContent).toBe('')
+  expect(cells[6].textContent).toBe('')
+  expect(cells[7].textContent).toBe('')
+  expect(cells[8].textContent).toBe('')
 });
 
 it('should display X at the first click', () => {
