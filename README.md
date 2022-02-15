@@ -1,6 +1,5 @@
 # Tic Tac Toe
 
-![Alt text](images/Kata_TicTacToe.png?raw=true "Tic Tac Toe")
 
 ## Setup
 
