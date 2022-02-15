@@ -45,11 +45,34 @@ it('should switch between X and O at each click', () => {
 });
 
 it ('should be X as winner', () => {
-  throw new Error('Not implemented');
+  render(<Grid />);
+
+  const cells = screen.queryAllByTestId('cell')
+
+  fireEvent.click(cells[0])
+  fireEvent.click(cells[1])
+  fireEvent.click(cells[4])
+  fireEvent.click(cells[2])
+  fireEvent.click(cells[8])
+
+  const status = screen.queryByTestId('status');
+  expect(status.textContent).toBe('x win!');
 });
 
 it ('should be O as winner', () => {
-  throw new Error('Not implemented');
+  render(<Grid />);
+
+  const cells = screen.queryAllByTestId('cell')
+
+  fireEvent.click(cells[0])
+  fireEvent.click(cells[3])
+  fireEvent.click(cells[6])
+  fireEvent.click(cells[4])
+  fireEvent.click(cells[7])
+  fireEvent.click(cells[5])
+
+  const status = screen.queryByTestId('status');
+  expect(status.textContent).toBe('o win!');
 });
 
 
