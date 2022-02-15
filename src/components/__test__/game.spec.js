@@ -77,20 +77,79 @@ it ('should be O as winner', () => {
 
 
 it('should be a draw', () => {
-  throw new Error('Not implemented');
+  render(<Grid />)
+
+  const cells = screen.queryAllByTestId('cell')
+
+  fireEvent.click(cells[0])
+  fireEvent.click(cells[4])
+  fireEvent.click(cells[8])
+  fireEvent.click(cells[6])
+  fireEvent.click(cells[2])
+  fireEvent.click(cells[5])
+  fireEvent.click(cells[3])
+  fireEvent.click(cells[1])
+  fireEvent.click(cells[7])
+
+  const status = screen.queryByTestId('statusDraw');
+  expect(status.textContent).toBe("It's a draw!");
 });
 
 
 it('should not be allowed to click on a filled cell', () => {
-  throw new Error('Not implemented');
+  render(<Grid />)
+
+  const cells = screen.queryAllByTestId('cell')
+  fireEvent.click(cells[1])
+  expect(cells[1].textContent).toBe('x')
+  fireEvent.click(cells[1])
+  expect(cells[1].textContent).toBe('x')
 });
 
 
 it('should not be allowed to click after win', () => {
-  throw new Error('Not implemented');
+  render(<Grid />)
+
+  const cells = screen.queryAllByTestId('cell')
+
+  fireEvent.click(cells[0])
+  fireEvent.click(cells[1])
+  fireEvent.click(cells[4])
+  fireEvent.click(cells[2])
+  fireEvent.click(cells[8])
+
+  const status = screen.getByTestId('status');
+  expect(status?.textContent).toBe('x win!');
+
+  expect(cells[5].textContent).toBe('')
+
+  fireEvent.click(cells[5])
+
+  expect(cells[5].textContent).toBe('')
 });
 
 
 it('should not be allowed to click after a draw', () => {
-  throw new Error('Not implemented');
+  render(<Grid />)
+
+  const cells = screen.queryAllByTestId('cell')
+
+  fireEvent.click(cells[0])
+  fireEvent.click(cells[4])
+  fireEvent.click(cells[8])
+  fireEvent.click(cells[6])
+  fireEvent.click(cells[2])
+  fireEvent.click(cells[5])
+  fireEvent.click(cells[3])
+  fireEvent.click(cells[1])
+  fireEvent.click(cells[7])
+
+  const status = screen.getByTestId('statusDraw');
+  expect(status?.textContent).toBe("It's a draw!");
+
+  expect(cells[0].textContent).toBe('x')
+
+  fireEvent.click(cells[0])
+
+  expect(cells[0].textContent).toBe('x')
 });

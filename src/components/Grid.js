@@ -8,6 +8,7 @@ const Grid = () => {
 	const [player, setPlayer] = useState('x');
 	const [cells, setCells] = useState(Array(9).fill(''));
 	const [winner, setWinner] = useState();
+  const [draw, setDraw] = useState(false);
 
 	const checkForWinner = (squares) => {
 			WinningMoves.forEach((pattern) => {
@@ -28,28 +29,40 @@ const Grid = () => {
 
 	const handleClick = (cellNum) => () => {
     let squares = [...cells];
-    if (player === 'x') {     // if it's x's turn
-      squares[cellNum] = 'x';
-      setPlayer('o');
-    } else {    // if it's o's turn
-      squares[cellNum] = 'o';
-      setPlayer('x');
+    if (!winner) {    // if there is no winner, continue ...
+      if (cells[cellNum] === '') {    // if there is empty cells, continue ...
+        if (player === 'x') {     // if it's x's turn
+          squares[cellNum] = 'x';
+          setPlayer('o');
+        } else {    // if it's o's turn
+          squares[cellNum] = 'o';
+          setPlayer('x');
+        }
+        checkForWinner(squares);
+        setCells(squares);
+      }
+      if (squares.includes('') === false) setDraw(true);
     }
-    checkForWinner(squares);
-    setCells(squares);
 	};
 
   const renderMessage = () => {
-      if (winner) {
+    if (winner) {
       return (
-      <div>
-        <p data-testid="status">{winner} win!</p>
-      </div>
+        <div>
+          <p data-testid="status">{winner} win!</p>
+        </div>
+      )
+    } else if (draw) {
+      return (
+        <div>
+          <p data-testid="statusDraw">It's a draw!</p>
+        </div>
       )
     } else {
       return (
         <p data-testid="nextPlayer">Next player : {player}</p>
-      )}
+      )
+    }
   };
 
   return (
